@@ -28,4 +28,4 @@ language code, and return the text translated from the source language into the 
 
 Write a script that can be run from the command-line, takes an input filename, output filename,
 source language, and target language. It translates the input file from the source language to
-the target language, and then writes it to the output file. You can use the sample file in the data direction for the input file.
+the target language, and then writes it to the output file. You can use the sample file in the data directory for the input file.
