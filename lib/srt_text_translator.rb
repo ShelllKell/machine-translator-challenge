@@ -1,14 +1,14 @@
+require './lib/translator'
+
 class SrtTextTranslator
 
-  def translate_srt_file(source_lang, target_lang)
-    element_array = SrtFormatter.extract_elements
+  def self.translate_srt_file(srt_info, source_lang, target_lang)
+    # element_array = SrtFormatter.extract_elements(srt_info)
     translator = Translator.new
 
-    element_array.map { |translation| translation["new_text"] = translator.get_translation(translation["text"], source_lang, target_lang) }
+    srt_info.map { |translation| translation["new_text"] = translator.get_translation(translation["text"], source_lang, target_lang) }
 
-    SrtFormatter.join_pieces(element_array)
-
-    element_array.map { |t| t["new_text"] }
+    srt_info
   end
 
 end

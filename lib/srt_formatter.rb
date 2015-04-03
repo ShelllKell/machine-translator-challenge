@@ -1,20 +1,17 @@
 require 'srt'
 
-DELIMITER = "\n"
-
 class SrtFormatter
 
-  def self.extract_elements
+  def self.extract_elements(input_filename)
     srt_info = []
 
-    file = SRT::File.parse(File.new("data/sriracha_trailer_en.srt"))
-      file.lines.map do |line|
+    file = SRT::File.parse(File.new(input_filename))
+      file.lines.each do |line|
         srt_block = {
           "text" => line.text.join(" "),
           "sequence" => line.sequence,
           "time_stamp" => line.time_str,
         }
-
         srt_info.push(srt_block)
       end
       srt_info
@@ -24,7 +21,7 @@ class SrtFormatter
     return_string = ""
 
       array_of_elements.each do |hash|
-        little_string = "#{hash["sequence"]}\n#{hash["time_stamp"]}\n#{hash["text"]}\n\n"
+        little_string = "#{hash["sequence"]}\n#{hash["time_stamp"]}\n#{hash["new_text"]}\n\n"
         return_string += little_string
       end
       return_string.strip
