@@ -10,16 +10,14 @@ end
 srt_info = SrtFormatter.extract_elements(ARGV[0])
 
 #mapping over the text and translating it with source and target language
-translation = SrtTextTranslator.translate_srt_file(srt_info, ARGV[2], ARGV[3])
+translation = SrtTextTranslator.translate_srt_info(srt_info, ARGV[2], ARGV[3])
 
-#putting the translated strings of text together
+#putting the translated strings plus sequence and time stamp back together
 whole_string = SrtFormatter.join_pieces(translation)
 
-#variable set to final translated string
-file = ReturnSrt.new
-
-#writing the file with the translated string to the output file name
-file.write_srt_file(whole_string, ARGV[1])
+File.open(ARGV[1], 'w') do |f|
+  f.puts(whole_string)
+end
 
 #success message
 puts "Successfully written to " + ARGV[1]
